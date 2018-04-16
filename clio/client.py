@@ -166,6 +166,19 @@ class ClioClient(object):
 			})
 			return json.loads(urllib.urlopen(api_oauth + '/token', 
 				data = post_args).read())
+
+		def refresh_token(self, refresh_token):
+			'''
+			This method retrieves a new Oauth token using the refresh token
+			'''
+			post_args = urllib.urlencode({
+				'client_id': self.public_key,
+				'client_secret': self.private_key,
+				'grant_type': 'refresh_token',
+				'refresh_token': refresh_token,
+				})
+			return json.loads(urllib.urlopen(api_oauth + 'token', 
+				data = post_args).read())
 	
 	class _PropClass(object):
 		'''
